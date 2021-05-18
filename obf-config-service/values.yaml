@@ -8,7 +8,7 @@ replicaCount: 1
 nameSpace: opendo # AKS
 
 image:
-  repository: registry.global.ccc.srvb.can.paas.cloudcenter.corp/sdi-devops-gsc/digitalonbording/obf-config-service  # URL harbor image witout version :1.0.3
+  repository: pgxi1weuacrcoehcr001.azurecr.io/gsc-onboarding/digitalonboarding.obf-config-service  # URL harbor image witout version :1.0.3
   pullPolicy: Always
   tag: develop
 ## Uncomment to download image private #DONT TOUCH
@@ -71,13 +71,13 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: "http"
   servicePort: http
   hosts:
-    - host: cce-config.dgo.sandigital.innaacc.dev.corp # URL DEL MICRO A EXPONER
+    - host: cce-config-usa.dgo.dev.pagonxt.corp # URL DEL MICRO A EXPONER
       paths:
         - / # PATH DEL MICRO
   tls:
     - secretName: opendo-tls-internet # NO TOCAR
       hosts:
-        - cce-config.dgo.sandigital.innaacc.dev.corp # BASE PATH DEL PROYECTO
+        - cce-config-usa.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
 
 nodeSelector: {}
 
