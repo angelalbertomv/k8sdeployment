@@ -1,0 +1,86 @@
+
+# Default values for consent-sandbox.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+nameSpace: opendo # AKS
+
+image:
+  repository: registry.global.ccc.srvb.can.paas.cloudcenter.corp/sdi-devops-gsc/digitalonbording/obf-config-service  # URL harbor image witout version :1.0.3
+  pullPolicy: Always
+  tag: develop
+## Uncomment to download image private #DONT TOUCH
+imagePullSecrets:
+  - name: regcred
+nameOverride: ""
+fullnameOverride: ""
+#DONT TOUCH
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+#DONT TOUCH
+podSecurityContext: {}
+# fsGroup: 2000
+#DONT TOUCH
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+# runAsUser: 1000
+
+#PUERTOS DE LOS CONTENEDORES DENTRO DEL AKS
+
+containers:
+  portName: http
+  port: 8888
+  protocol: TCP
+
+
+#VARIABLES EJEMPLO PERFIL , VARIABLES EN LINEAS DE COMANDOS PARA JAVA O ESPECIFICAS DE SPRING
+env:
+  SERVICE_URL_DEFAULT_ZONE: "cce-registry-and-location-server"
+  CONFIG_SERVER_SERVICE_ID: cce-config-server
+
+envSecrets:
+  CONFIG_SERVER_GIT_URI: cce-secrets
+  CONFIG_SERVER_SECURITY_USERNAME: cce-secrets
+  CONFIG_SERVER_SECURITY_PASSWORD: cce-secrets
+  CONFIG_SERVER_GIT_USERNAME: cce-secrets
+  CONFIG_SERVER_GIT_PASSWORD: cce-secrets
+
+
+service:
+  type: ClusterIP
+  portName: http
+  port: 8888
+  targetPort: 8888
+  containerPort: 8888 #RELACIONADO CON EL CONTAINERS poort
+
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: "http"
+  servicePort: http
+  hosts:
+    - host: cce-config.dgo.sandigital.innaacc.dev.corp # URL DEL MICRO A EXPONER
+      paths:
+        - / # PATH DEL MICRO
+  tls:
+    - secretName: opendo-tls-internet # NO TOCAR
+      hosts:
+        - cce-config.dgo.sandigital.innaacc.dev.corp # BASE PATH DEL PROYECTO
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

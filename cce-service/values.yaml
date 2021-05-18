@@ -1,0 +1,91 @@
+
+# Default values for consent-sandbox.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+nameSpace: opendo # AKS
+
+image:
+  # URL harbor image without version: 1.0.3
+  repository: registry.global.ccc.srvb.can.paas.cloudcenter.corp/sdi-devops-gsc/digitalonbording/cce-service
+  pullPolicy: Always
+  tag: develop
+## Uncomment to download image private #DONT TOUCH
+imagePullSecrets:
+  - name: regcred
+nameOverride: ""
+fullnameOverride: ""
+#DONT TOUCH
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+#DONT TOUCH
+podSecurityContext: {}
+# fsGroup: 2000
+#DONT TOUCH
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+# runAsUser: 1000
+
+#PUERTOS DE LOS CONTENEDORES DENTRO DEL AKS
+
+containers:
+  portName: http
+  port: 8093
+  protocol: TCP
+
+
+#VARIABLES EJEMPLO PERFIL , VARIABLES EN LINEAS DE COMANDOS PARA JAVA O ESPECIFICAS DE SPRING
+env:
+  EUREKA_SERVER_URL: "cce-registry-and-location-server"
+  SPRING_PROFILES_ACTIVE: dev
+  CONFIG_SERVER_SERVICE_ID: cce-config-server
+  ZIPKIN_SERVER_URL: https://cce-monitoring.dgo.sandigital.innaacc.dev.corp/
+  SERENITY_ENABLED: false
+  SERENITY_KEY_SERVER_URL: https://gos.apis.sandigital.innaacc.dev.corp/v1/publicKey/
+     
+envSecrets:
+  CONFIG_SERVER_SECURITY_USERNAME: cce-secrets
+  CONFIG_SERVER_SECURITY_PASSWORD: cce-secrets
+  THIRD_PARTY_ACCESS_TOKEN_GRANT_TYPE: cce-secrets
+  THIRD_PARTY_REFRESH_TOKEN_GRANT_TYPE: cce-secrets
+  THIRD_PARTY_CLIENT_ID: cce-secrets
+  THIRD_PARTY_CLIENT_SECRET: cce-secrets
+
+service:
+  type: ClusterIP
+  portName: http
+  port: 8093
+  targetPort: 8093
+  containerPort: 8093 #RELACIONADO CON EL CONTAINERS poort
+
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: "http"
+  servicePort: http
+  hosts:
+    - host: cce-service.dgo.sandigital.innaacc.dev.corp # URL DEL MICRO A EXPONER
+      paths:
+        - / # PATH DEL MICRO
+  tls:
+    - secretName: opendo-tls-internet # NO TOCAR
+      hosts:
+        - cce-service.dgo.sandigital.innaacc.dev.corp # BASE PATH DEL PROYECTO
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
