@@ -8,7 +8,7 @@ replicaCount: 1
 nameSpace: opendo # AKS
 
 image:
-  repository: registry.global.ccc.srvb.can.paas.cloudcenter.corp/sdi-devops-gsc/digitalonbording/cce-gateway-service  # URL harbor image witout version :1.0.3
+  repository: pgxi1weuacrcoehcr001.azurecr.io/gsc-onboarding/digitalonboarding.cce-gateway-service  # URL harbor image witout version :1.0.3
   pullPolicy: Always
   tag: develop
 ## Uncomment to download image private #DONT TOUCH
@@ -49,7 +49,7 @@ env:
   SPRING_PROFILES_ACTIVE: dev
   CONFIG_SERVER_SERVICE_ID: cce-config-server
   CCE_EMAIL_SERVICE_ID: cce-service
-  ZIPKIN_SERVER_URL: https://cce-monitoring.dgo.sandigital.innaacc.dev.corp/
+  ZIPKIN_SERVER_URL: https://cce-monitoring-usa.dgo.dev.pagonxt.corp/
   SERENITY_ENABLED: false
   SERENITY_KEY_SERVER_URL: https://gos.apis.sandigital.innaacc.dev.corp/v1/publicKey/
   
@@ -75,13 +75,13 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: "http"
   servicePort: https
   hosts:
-    - host: cce-gateway.dgo.sandigital.innaacc.dev.corp # URL DEL MICRO A EXPONER
+    - host: cce-gateway-usa.dgo.dev.pagonxt.corp #URL DEL MICRO A EXPONER
       paths:
         - / # PATH DEL MICRO
   tls:
     - secretName: opendo-tls-internet # NO TOCAR
       hosts:
-        - cce-gateway.dgo.sandigital.innaacc.dev.corp # BASE PATH DEL PROYECTO
+        - cce-gateway-usa.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
 
 nodeSelector: {}
 
