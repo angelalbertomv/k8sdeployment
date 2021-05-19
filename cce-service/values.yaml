@@ -11,7 +11,7 @@ image:
   # URL harbor image without version: 1.0.3
   repository: pgxi1weuacrcoehcr001.azurecr.io/gsc-onboarding/digitalonboarding.cce-service
   pullPolicy: Always
-  tag: develop
+  tag: 1.0.7-release
 ## Uncomment to download image private #DONT TOUCH
 imagePullSecrets:
   - name: regcred
@@ -46,7 +46,7 @@ containers:
 
 #VARIABLES EJEMPLO PERFIL , VARIABLES EN LINEAS DE COMANDOS PARA JAVA O ESPECIFICAS DE SPRING
 env:
-  EUREKA_SERVER_URL: "cce-registry-and-location-server"
+  EUREKA_SERVER_URL: cce-registry-and-location-server
   SPRING_PROFILES_ACTIVE: dev
   CONFIG_SERVER_SERVICE_ID: cce-config-server
   ZIPKIN_SERVER_URL: https://cce-monitoring-usa.dgo.dev.pagonxt.corp/
@@ -73,7 +73,7 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/backend-protocol: "http"
+    nginx.ingress.kubernetes.io/backend-protocol: http
   servicePort: http
   hosts:
     - host: cce-service-usa.dgo.dev.pagonxt.corp # URL DEL MICRO A EXPONER

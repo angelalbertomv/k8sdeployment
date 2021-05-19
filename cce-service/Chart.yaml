@@ -18,4 +18,4 @@ version: 0.0.1
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: develop # VERSION DEL MICRO EN HARBOR
+appVersion: 1.0.7-release # VERSION DEL MICRO EN HARBOR

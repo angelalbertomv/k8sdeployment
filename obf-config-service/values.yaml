@@ -10,7 +10,7 @@ nameSpace: opendo # AKS
 image:
   repository: pgxi1weuacrcoehcr001.azurecr.io/gsc-onboarding/digitalonboarding.obf-config-service  # URL harbor image witout version :1.0.3
   pullPolicy: Always
-  tag: develop
+  tag: 1.0.3-release
 ## Uncomment to download image private #DONT TOUCH
 imagePullSecrets:
   - name: regcred
@@ -45,7 +45,7 @@ containers:
 
 #VARIABLES EJEMPLO PERFIL , VARIABLES EN LINEAS DE COMANDOS PARA JAVA O ESPECIFICAS DE SPRING
 env:
-  SERVICE_URL_DEFAULT_ZONE: "cce-registry-and-location-server"
+  SERVICE_URL_DEFAULT_ZONE: cce-registry-and-location-server
   CONFIG_SERVER_SERVICE_ID: cce-config-server
 
 envSecrets:
@@ -68,7 +68,7 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/backend-protocol: "http"
+    nginx.ingress.kubernetes.io/backend-protocol: http
   servicePort: http
   hosts:
     - host: cce-config-usa.dgo.dev.pagonxt.corp # URL DEL MICRO A EXPONER
