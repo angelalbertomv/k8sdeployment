@@ -1,0 +1,100 @@
+name: DEV Deployment
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: [ self-hosted, ubuntu-latest, eastus ]
+    environment: dev
+    env:
+      NAMESPACE: opendo      
+    steps:
+    - name: Check environment variables
+      run: |
+        if [ "${{ env.NAMESPACE}}" = "example-0" ] && [ "${{ github.event.repository.name }}" != "deploy-k8s-apps" ]; then
+          echo "Change default environment variable NAMESPACE value"
+          exit -1       
+        fi
+        if [[ -z " ${{ secrets.K8S_FQDN }}" ]]; then
+          echo "Define environment variable K8S_FQDN in github environments"
+          exit -4
+        elif [[ -z "${{ secrets.K8S_TOKEN }}" ]]; then          
+         echo "Define environment variable K8S_TOKEN in github environments"
+          exit -5
+        fi  
+    - name: Clean helm directory
+      shell: bash
+      run: rm -rf ~/.helm
+    - name: Checkout
+      uses: actions/checkout@v2      
+    - name: Setup context k8s
+      uses: azure/k8s-set-context@v1
+      with:
+        method: service-account
+        k8s-url: ${{ secrets.K8S_FQDN }}
+        k8s-secret: "${{ secrets.K8S_TOKEN }}"
+    - name: Install Helm
+      uses: azure/setup-helm@v1
+      with:
+        version: '3.5.2'
+    - name: Helm Install/Upgrade Config
+      env:
+        CHART_NAME: obf-config-service/
+        CHART_DESC: cceconfigserver
+        VALUES_NAME: obf-config-service/values.yaml
+      run: |
+        PARAMS='--dry-run'
+        if [ "${{github.event_name}}" = "push" ]; then
+          PARAMS=''
+        fi
+        helm upgrade -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME
+    - name: Helm Install/Upgrade Eureka
+      env:
+        CHART_NAME: obf-discovery-service/
+        CHART_DESC: cceeureka
+        VALUES_NAME: obf-discovery-service/values.yaml
+      run: |
+        PARAMS='--dry-run'
+        if [ "${{github.event_name}}" = "push" ]; then
+          PARAMS=''
+        fi
+        helm upgrade -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME
+    - name: Helm Install/Upgrade Gateway Server
+      env:
+        CHART_NAME: cce-gateway-service/
+        CHART_DESC: ccegateway
+        VALUES_NAME: cce-gateway-service/values.yaml
+      run: |
+        PARAMS='--dry-run'
+        if [ "${{github.event_name}}" = "push" ]; then
+          PARAMS=''
+        fi
+        helm upgrade -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME    
+    - name: Helm Install/Upgrade Service
+      env:
+        CHART_NAME: cce-service/
+        CHART_DESC: cceservice
+        VALUES_NAME: cce-service/values.yaml
+      run: |
+        PARAMS='--dry-run'
+        if [ "${{github.event_name}}" = "push" ]; then
+          PARAMS=''
+        fi
+        helm upgrade -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME    
+    - name: Helm Install/Upgrade Zipkin
+      env:
+        CHART_NAME: zipkin-server/
+        CHART_DESC: ccezipkin
+        VALUES_NAME: zipkin-server/values.yaml
+      run: |
+        PARAMS='--dry-run'
+        if [ "${{github.event_name}}" = "push" ]; then
+          PARAMS=''
+        fi
+        helm upgrade -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME      
