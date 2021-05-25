@@ -52,6 +52,8 @@ env:
   ZIPKIN_SERVER_URL: https://cce-monitoring-usa.dgo.dev.pagonxt.corp/
   SERENITY_ENABLED: false
   SERENITY_KEY_SERVER_URL: https://gos.apis.sandigital.innaacc.dev.corp/v1/publicKey/
+  HTTP_PROXY: http://proxy.threatpulse.net:8080
+  HTTPS_PROXY: http://proxy.threatpulse.net:8080
      
 envSecrets:
   CONFIG_SERVER_SECURITY_USERNAME: cce-secrets
