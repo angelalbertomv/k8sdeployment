@@ -47,6 +47,8 @@ containers:
 env:
   SERVICE_URL_DEFAULT_ZONE: cce-registry-and-location-server
   CONFIG_SERVER_SERVICE_ID: cce-config-server
+  HTTP_PROXY: http://proxy.threatpulse.net:8080
+  HTTPS_PROXY: http://proxy.threatpulse.net:8080
 
 envSecrets:
   CONFIG_SERVER_GIT_URI: cce-secrets
