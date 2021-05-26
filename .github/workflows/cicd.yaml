@@ -43,6 +43,20 @@ jobs:
       uses: azure/setup-helm@v1
       with:
         version: '3.5.2'
+    - name: Helm Install/Upgrade Eureka
+      env:
+        CHART_NAME: obf-discovery-service/
+        CHART_DESC: cceeureka
+        VALUES_NAME: obf-discovery-service/values.yaml
+      run: |
+        PARAMS='--dry-run'
+        if [ "${{github.event_name}}" = "push" ]; then
+          PARAMS=''
+        fi
+        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME        
+    - name: Delay
+      shell: bash
+      run: sleep 60              
     - name: Helm Install/Upgrade Config
       env:
         CHART_NAME: obf-config-service/
@@ -54,22 +68,25 @@ jobs:
           PARAMS=''
         fi
         helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME
-    - name: Helm Install/Upgrade Eureka
-      env:
-        CHART_NAME: obf-discovery-service/
-        CHART_DESC: cceeureka
-        VALUES_NAME: obf-discovery-service/values.yaml
-      run: |
-        PARAMS='--dry-run'
-        if [ "${{github.event_name}}" = "push" ]; then
-          PARAMS=''
-        fi
-        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME
+    - name: Delay
+      shell: bash
+      run: sleep 60        
     - name: Helm Install/Upgrade Service
       env:
         CHART_NAME: cce-service/
         CHART_DESC: cceservice
         VALUES_NAME: cce-service/values.yaml
+      run: |
+        PARAMS='--dry-run'
+        if [ "${{github.event_name}}" = "push" ]; then
+          PARAMS=''
+        fi
+        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME    
+    - name: Helm Install/Upgrade Gateway Server
+      env:
+        CHART_NAME: cce-gateway-service/
+        CHART_DESC: ccegateway
+        VALUES_NAME: cce-gateway-service/values.yaml
       run: |
         PARAMS='--dry-run'
         if [ "${{github.event_name}}" = "push" ]; then
@@ -86,15 +103,4 @@ jobs:
         if [ "${{github.event_name}}" = "push" ]; then
           PARAMS=''
         fi
-        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME      
-    - name: Helm Install/Upgrade Gateway Server
-      env:
-        CHART_NAME: cce-gateway-service/
-        CHART_DESC: ccegateway
-        VALUES_NAME: cce-gateway-service/values.yaml
-      run: |
-        PARAMS='--dry-run'
-        if [ "${{github.event_name}}" = "push" ]; then
-          PARAMS=''
-        fi
-        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME    
+        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME              
