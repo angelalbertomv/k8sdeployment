@@ -51,7 +51,7 @@ env:
   CCE_EMAIL_SERVICE_ID: cce-service
   ZIPKIN_SERVER_URL: https://cce-monitoring-usa.dgo.dev.pagonxt.corp/
   SERENITY_ENABLED: false
-  SERENITY_KEY_SERVER_URL: https://gos.apis.sandigital.innaacc.dev.corp/v1/publicKey/
+  SERENITY_KEY_SERVER_URL: https://sos.dca.dev.api.pagonxt.corp/v1/publicKey/
   
 envSecrets:
   CONFIG_SERVER_SECURITY_USERNAME: cce-secrets
