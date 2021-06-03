@@ -45,7 +45,7 @@ containers:
 #VARIABLES EJMPLO PERFIL , VARIABLES EN LINEAS DE COMANDOS PARA JAVA O ESPECIFICAS DE SPRING
 env:
   EUREKA_HOSTNAME: cce-registry-and-location-server
-  SPRING_PROFILES_ACTIVE: dev
+  SPRING_PROFILES_ACTIVE: pre
 
 envSecrets: {}
 
@@ -64,13 +64,13 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: http
   servicePort: http
   hosts:
-    - host: cce-registry-usa.dgo.dev.pagonxt.corp #URL DEL MICRO A EXPONER
+    - host: cce-registry-usa.dgo.pre.pagonxt.corp #URL DEL MICRO A EXPONER
       paths:
         - / # PATH DEL MICRO
   tls:
     - secretName: opendo-tls-internet # NO TOCAR
       hosts:
-        - cce-registry-usa.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
+        - cce-registry-usa.dgo.pre.pagonxt.corp # BASE PATH DEL PROYECTO
 
 nodeSelector: {}
 

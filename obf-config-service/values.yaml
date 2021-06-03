@@ -73,13 +73,13 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: http
   servicePort: http
   hosts:
-    - host: cce-config-usa.dgo.dev.pagonxt.corp # URL DEL MICRO A EXPONER
+    - host: cce-config-usa.dgo.pre.pagonxt.corp # URL DEL MICRO A EXPONER
       paths:
         - / # PATH DEL MICRO
   tls:
     - secretName: opendo-tls-internet # NO TOCAR
       hosts:
-        - cce-config-usa.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
+        - cce-config-usa.dgo.pre.pagonxt.corp # BASE PATH DEL PROYECTO
 
 nodeSelector: {}
 

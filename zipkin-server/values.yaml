@@ -44,7 +44,7 @@ containers:
 
 #VARIABLES EJMPLO PERFIL , VARIABLES EN LINEAS DE COMANDOS PARA JAVA O ESPECIFICAS DE SPRING 
 env:
-  SPRING_PROFILES_ACTIVE: dev
+  SPRING_PROFILES_ACTIVE: pre
 
 
 envSecrets: {}
@@ -64,13 +64,13 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: http
   servicePort: https
   hosts:
-    - host: cce-monitoring-usa.dgo.dev.pagonxt.corp #URL DEL MICRO A EXPONER
+    - host: cce-monitoring-usa.dgo.pre.pagonxt.corp #URL DEL MICRO A EXPONER
       paths:
         - / # PATH DEL MICRO
   tls:
     - secretName: opendo-tls-internet # NO TOCAR
       hosts:
-        - cce-monitoring-usa.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
+        - cce-monitoring-usa.dgo.pre.pagonxt.corp # BASE PATH DEL PROYECTO
 
 nodeSelector: {}
 

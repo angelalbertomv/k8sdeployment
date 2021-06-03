@@ -47,11 +47,11 @@ containers:
 #VARIABLES EJEMPLO PERFIL , VARIABLES EN LINEAS DE COMANDOS PARA JAVA O ESPECIFICAS DE SPRING
 env:
   EUREKA_SERVER_URL: cce-registry-and-location-server
-  SPRING_PROFILES_ACTIVE: dev
+  SPRING_PROFILES_ACTIVE: pre
   CONFIG_SERVER_SERVICE_ID: cce-config-server
-  ZIPKIN_SERVER_URL: https://cce-monitoring-usa.dgo.dev.pagonxt.corp/
+  ZIPKIN_SERVER_URL: https://cce-monitoring-usa.dgo.pre.pagonxt.corp/
   SERENITY_ENABLED: false
-  SERENITY_KEY_SERVER_URL: https://sos.dca.dev.api.pagonxt.corp/v1/publicKey/
+  SERENITY_KEY_SERVER_URL: https://sos.dca.pre.api.pagonxt.corp/v1/publicKey/
   HTTP_PROXY: http://proxy.threatpulse.net:8080
   HTTPS_PROXY: http://proxy.threatpulse.net:8080
      
@@ -78,13 +78,13 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: http
   servicePort: http
   hosts:
-    - host: cce-service-usa.dgo.dev.pagonxt.corp # URL DEL MICRO A EXPONER
+    - host: cce-service-usa.dgo.pre.pagonxt.corp # URL DEL MICRO A EXPONER
       paths:
         - / # PATH DEL MICRO
   tls:
     - secretName: opendo-tls-internet # NO TOCAR
       hosts:
-        - cce-service-usa.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
+        - cce-service-usa.dgo.pre.pagonxt.corp # BASE PATH DEL PROYECTO
 
 nodeSelector: {}
 
