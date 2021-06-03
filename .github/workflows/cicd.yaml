@@ -1,17 +1,17 @@
-name: DEV Deployment
+name: PRE Deployment
 on:
   push:
     branches:
-      - master
+      - zu1_pre
   pull_request:
     branches:
-      - master
+      - zu1_pre
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: [ self-hosted, ubuntu-latest, eastus ]
-    environment: dev
+    environment: zu1_pre
     env:
       NAMESPACE: opendo      
     steps:
@@ -71,7 +71,7 @@ jobs:
     - name: Delay
       shell: bash
       run: sleep 60        
-    - name: Helm Install/Upgrade Service
+    - name: Helm Install/Upgrade CCE Service
       env:
         CHART_NAME: cce-service/
         CHART_DESC: cceservice
@@ -104,3 +104,17 @@ jobs:
           PARAMS=''
         fi
         helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME              
+    - name: Checkout Teams Notifier
+      uses: actions/checkout@v2    
+      with:
+        repository: pagonxt/digitalonboarding.utils.teams-notifier
+        token: ${{ secrets.ACTIONS_TOKEN }}
+        path: .github/actions/digitalonboarding.utils.teams-notifier
+    - name: Send Teams notification
+      uses: ./.github/actions/digitalonboarding.utils.teams-notifier        
+      with: 
+        github-token: ${{ secrets.ACTIONS_TOKEN }}
+        ms-teams-webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URI }}
+        notification-summary: Despliegue CCE PRE Virginia
+        notification-color: 17a2b8
+        timezone: Europe/Madrid   
