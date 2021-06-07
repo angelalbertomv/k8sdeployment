@@ -34,9 +34,15 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
 # runAsUser: 1000
+resources:
+  requests:
+    memory: "1Gi"
+    cpu: "100m"
+  limits:
+    memory: "2Gi"
+    cpu: "200m"
 
 #PUERTOS DE LOS CONTENEDORES DENTRO DEL AKS
-
 containers:
   portName: http
   port: 8888
