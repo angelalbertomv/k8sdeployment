@@ -36,11 +36,20 @@ securityContext: {}
 # runAsUser: 1000
 resources:
   requests:
-    memory: "1Gi"
-    cpu: "100m"
+    memory: 512Mi
+    cpu: 200m
   limits:
-    memory: "2Gi"
-    cpu: "200m"
+    memory: 1Gi
+    cpu: 400m
+
+#AUTOSCALER CONFIGURATION
+autoscaler:
+  min_replicas: 1
+  max_replicas: 10
+  #Average memory utilization value
+  memory_average_value: 700Mi
+  #Average cpu utilization percentage
+  cpu_average_utilization: 70
 
 #PUERTOS DE LOS CONTENEDORES DENTRO DEL AKS
 
