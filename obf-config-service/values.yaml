@@ -60,7 +60,7 @@ containers:
 
 #VARIABLES EJEMPLO PERFIL , VARIABLES EN LINEAS DE COMANDOS PARA JAVA O ESPECIFICAS DE SPRING
 env:
-  SPRING_PROFILES_ACTIVE: dev,proxy
+  SPRING_PROFILES_ACTIVE: pre,proxy
   SERVICE_URL_DEFAULT_ZONE: cce-registry-and-location-server
   CONFIG_SERVER_SERVICE_ID: cce-config-server
   HTTP_PROXY: http://proxy.threatpulse.net:8080
