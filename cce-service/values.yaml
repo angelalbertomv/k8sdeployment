@@ -35,6 +35,7 @@ securityContext:
    readOnlyRootFilesystem: true
    runAsNonRoot: true
    runAsUser: 1000
+   
 resources:
   requests:
     memory: 512Mi
@@ -85,12 +86,16 @@ service:
   targetPort: 8093
   containerPort: 8093 #RELACIONADO CON EL CONTAINERS poort
 
-
 ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/backend-protocol: http
+    nginx.ingress.kubernetes.io/server-snippet: |
+      add_header Cache-Control "no-store";
+      add_header X-Frame-Options "sameorigin" always;
+      add_header X-Content-Type-Options "nosniff" always;
+      more_set_headers "Content-Security-Policy: script-src 'self'";	    
   servicePort: http
   hosts:
     - host: cce-service-usa.dgo.pre.pagonxt.corp # URL DEL MICRO A EXPONER
