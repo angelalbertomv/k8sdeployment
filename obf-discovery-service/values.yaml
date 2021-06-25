@@ -41,14 +41,14 @@ resources:
     cpu: 100m
   limits:
     memory: 2Gi
-    cpu: 200m
+    cpu: 2000m
 
 #AUTOSCALER CONFIGURATION
 autoscaler:
   min_replicas: 1
   max_replicas: 10
   #Average memory utilization value
-  memory_average_value: 800Mi
+  memory_average_value: 1800Mi
   #Average cpu utilization percentage
   cpu_average_utilization: 80
 
