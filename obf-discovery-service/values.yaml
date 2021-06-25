@@ -40,8 +40,8 @@ resources:
     memory: 156Mi
     cpu: 100m
   limits:
-    memory: 1.5Gi
-    cpu: 1500m
+    memory: 2Gi
+    cpu: 200m
 
 #AUTOSCALER CONFIGURATION
 autoscaler:
