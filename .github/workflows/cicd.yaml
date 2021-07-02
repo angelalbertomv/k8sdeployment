@@ -1,17 +1,17 @@
-name: PRE Deployment
+name: DEV Deployment
 on:
   push:
     branches:
-      - zu1_pre
+      - master
   pull_request:
     branches:
-      - zu1_pre
+      - master
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: [ self-hosted, ubuntu-latest, eastus ]
-    environment: zu1_pre
+    environment: dev
     env:
       NAMESPACE: opendo      
     steps:
@@ -103,18 +103,4 @@ jobs:
         if [ "${{github.event_name}}" = "push" ]; then
           PARAMS=''
         fi
-        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME              
-    - name: Checkout Teams Notifier
-      uses: actions/checkout@v2    
-      with:
-        repository: pagonxt/digitalonboarding.utils.teams-notifier
-        token: ${{ secrets.ACTIONS_TOKEN }}
-        path: .github/actions/digitalonboarding.utils.teams-notifier
-    - name: Send Teams notification
-      uses: ./.github/actions/digitalonboarding.utils.teams-notifier        
-      with: 
-        github-token: ${{ secrets.ACTIONS_TOKEN }}
-        ms-teams-webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URI }}
-        notification-summary: Despliegue CCE PRE Virginia
-        notification-color: 17a2b8
-        timezone: Europe/Madrid   
+        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME
