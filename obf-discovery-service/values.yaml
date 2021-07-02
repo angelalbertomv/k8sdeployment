@@ -10,7 +10,7 @@ nameSpace: opendo # AKS
 image:
   repository: pgxi1weuacrcoehcr001.azurecr.io/gsc-onboarding/digitalonboarding.obf-discovery-service  # URL harbor image witout version :1.0.3
   pullPolicy: Always
-  tag: 1.0.4-release
+  tag: 1.0.5-release
 ## Uncomment to download image private #DONT TOUCH
 imagePullSecrets:
   - name: regcred
@@ -23,25 +23,26 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name:
+
+podSecurityContext:
+ fsGroup: 2000
 #DONT TOUCH
-podSecurityContext: {}
-# fsGroup: 2000
-#DONT TOUCH
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-# runAsNonRoot: true
-# runAsUser: 1000
+securityContext:
+   capabilities:
+     drop:
+     - ALL
+   readOnlyRootFilesystem: false
+   runAsNonRoot: true
+   runAsUser: 1000
+   
 resources:
   requests:
-    memory: 128Mi
+    memory: 156Mi
     cpu: 100m
   limits:
     memory: 2Gi
     cpu: 2000m
- 
+
 #AUTOSCALER CONFIGURATION
 autoscaler:
   min_replicas: 1  
@@ -49,8 +50,7 @@ autoscaler:
   #Average memory utilization value
   memory_average_value: 1800Mi
   #Average cpu utilization percentage
-  cpu_average_utilization: 90
-
+  cpu_average_utilization: 80
 
 #PUERTOS DE LOS CONTENEDORES DENTRO DEL AKS
 containers:
@@ -60,8 +60,8 @@ containers:
 
 #VARIABLES EJMPLO PERFIL , VARIABLES EN LINEAS DE COMANDOS PARA JAVA O ESPECIFICAS DE SPRING
 env:
-  EUREKA_HOSTNAME: cce-registry-and-location-server
   SPRING_PROFILES_ACTIVE: dev
+  EUREKA_HOSTNAME: cce-registry-and-location-server
 
 envSecrets: {}
 
@@ -83,10 +83,14 @@ ingress:
     - host: cce-registry-usa.dgo.dev.pagonxt.corp #URL DEL MICRO A EXPONER
       paths:
         - / # PATH DEL MICRO
+    - host: cce-registry-usa.internal.dgo.dev.pagonxt.corp #URL DEL MICRO A EXPONER
+      paths:
+        - / # PATH DEL MICRO
   tls:
     - secretName: opendo-tls-internet # NO TOCAR
       hosts:
         - cce-registry-usa.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
+        - cce-registry-usa.internal.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
 
 nodeSelector: {}
 
