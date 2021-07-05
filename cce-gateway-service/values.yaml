@@ -92,13 +92,17 @@ ingress:
     nginx.ingress.kubernetes.io/backend-protocol: http
   servicePort: https
   hosts:
-    - host: cce-gateway-usa.dgo.pre.pagonxt.corp #URL DEL MICRO A EXPONER
+    - host: cce-gateway-usa.dgo.dev.pagonxt.corp #URL DEL MICRO A EXPONER
+      paths:
+        - / # PATH DEL MICRO
+    - host: cce-gateway-usa.internal.dgo.dev.pagonxt.corp #URL DEL MICRO A EXPONER
       paths:
         - / # PATH DEL MICRO
   tls:
     - secretName: opendo-tls-internet # NO TOCAR
       hosts:
-        - cce-gateway-usa.dgo.pre.pagonxt.corp # BASE PATH DEL PROYECTO
+        - cce-gateway-usa.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
+        - cce-gateway-usa.internal.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
 
 nodeSelector: {}
 
