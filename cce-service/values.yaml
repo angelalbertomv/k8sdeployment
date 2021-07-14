@@ -11,7 +11,7 @@ image:
   # URL harbor image without version: 1.0.3
   repository: pgxi1weuacrcoehcr001.azurecr.io/gsc-onboarding/digitalonboarding.cce-service
   pullPolicy: Always
-  tag: develop
+  tag: 1.0.7-release
 ## Uncomment to download image private #DONT TOUCH
 imagePullSecrets:
   - name: regcred

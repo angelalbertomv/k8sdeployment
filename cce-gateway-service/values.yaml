@@ -10,7 +10,7 @@ nameSpace: opendo # AKS
 image:
   repository: pgxi1weuacrcoehcr001.azurecr.io/gsc-onboarding/digitalonboarding.cce-gateway-service  # URL harbor image without version :1.0.3
   pullPolicy: Always
-  tag: develop
+  tag: 1.0.7-release
 ## Uncomment to download image private #DONT TOUCH
 imagePullSecrets:
   - name: regcred
