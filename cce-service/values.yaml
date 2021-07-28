@@ -78,6 +78,10 @@ envSecrets:
   THIRD_PARTY_REFRESH_TOKEN_GRANT_TYPE: cce-secrets
   THIRD_PARTY_CLIENT_ID: cce-secrets
   THIRD_PARTY_CLIENT_SECRET: cce-secrets
+  AZURE_URI: cce-secrets
+  AZURE_CLIENT_ID: cce-secrets
+  AZURE_CLIENT_SECRET: cce-secrets
+  AZURE_TENANT_ID: cce-secrets
 
 service:
   type: ClusterIP
