@@ -68,6 +68,7 @@ env:
   ZIPKIN_SERVER_URL: https://cce-monitoring-usa.dgo.dev.pagonxt.corp/
   SERENITY_ENABLED: false
   SERENITY_KEY_SERVER_URL: https://sos.onboarding.dca.dev.api.pagonxt.corp/v1/publicKey/
+  AZURE_KEYS: emailage-cert, threatpulse-ca-cert, threatpulse-root-ca-cert
      
 envSecrets:
   CONFIG_SERVER_SECURITY_USERNAME: cce-secrets
