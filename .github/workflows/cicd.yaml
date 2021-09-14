@@ -46,7 +46,7 @@ jobs:
     - name: Helm Install/Upgrade Eureka
       env:
         CHART_NAME: obf-discovery-service/
-        CHART_DESC: cceeureka
+        CHART_DESC: ccediscovery
         VALUES_NAME: obf-discovery-service/values.yaml
       run: |
         PARAMS='--dry-run'
@@ -60,7 +60,7 @@ jobs:
     - name: Helm Install/Upgrade Config
       env:
         CHART_NAME: obf-config-service/
-        CHART_DESC: cceconfigserver
+        CHART_DESC: cceconfig
         VALUES_NAME: obf-config-service/values.yaml
       run: |
         PARAMS='--dry-run'
@@ -82,10 +82,10 @@ jobs:
           PARAMS=''
         fi
         helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME    
-    - name: Helm Install/Upgrade Gateway Server
+    - name: Helm Install/Upgrade Gateway Service
       env:
         CHART_NAME: cce-reactive-gateway-service/
-        CHART_DESC: ccegateway
+        CHART_DESC: ccereactivegateway
         VALUES_NAME: cce-reactive-gateway-service/values.yaml
       run: |
         PARAMS='--dry-run'
@@ -96,7 +96,7 @@ jobs:
     - name: Helm Install/Upgrade Zipkin
       env:
         CHART_NAME: zipkin-server/
-        CHART_DESC: ccezipkin
+        CHART_DESC: ccemonitoring
         VALUES_NAME: zipkin-server/values.yaml
       run: |
         PARAMS='--dry-run'

@@ -1,5 +1,5 @@
 apiVersion: v2
-name: cce-gateway-service
+name: cce-reactive-gateway-service
 description: CCE API Gateway   #Helm chart for Kubernetes
 
 # A chart can be either an 'application' or a 'library' chart.
@@ -18,4 +18,4 @@ version: 0.0.1
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 1.0.7-release # VERSION DEL MICRO EN HARBOR
+appVersion: develop # VERSION DEL MICRO EN HARBOR

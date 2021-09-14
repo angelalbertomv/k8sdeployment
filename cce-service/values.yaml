@@ -62,9 +62,9 @@ containers:
 
 #VARIABLES EJEMPLO PERFIL , VARIABLES EN LINEAS DE COMANDOS PARA JAVA O ESPECIFICAS DE SPRING
 env:
-  EUREKA_SERVER_URL: cce-registry-and-location-server
+  EUREKA_SERVER_URL: cce-discovery-service
   SPRING_PROFILES_ACTIVE: dev
-  CONFIG_SERVER_SERVICE_ID: cce-config-server
+  CONFIG_SERVER_SERVICE_ID: cce-config-service
   ZIPKIN_SERVER_URL: https://cce-monitoring-usa.dgo.dev.pagonxt.corp/
   SERENITY_ENABLED: false
   SERENITY_KEY_SERVER_URL: https://sos.onboarding.dca.dev.api.pagonxt.corp/v1/publicKey/

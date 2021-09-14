@@ -1,6 +1,6 @@
 apiVersion: v2
 name: cce-config-server
-description: Configuration Server for CCE   Helm chart for Kubernetes
+description: Configuration Server for CCE Helm chart for Kubernetes
 
 # A chart can be either an 'application' or a 'library' chart.
 #
