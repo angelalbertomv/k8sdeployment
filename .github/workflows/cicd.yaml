@@ -86,7 +86,7 @@ jobs:
       env:
         CHART_NAME: cce-gateway-service/
         CHART_DESC: ccegateway
-        VALUES_NAME: cce-gateway-service/values.yaml
+        VALUES_NAME: cce-reactive-gateway-service/values.yaml
       run: |
         PARAMS='--dry-run'
         if [ "${{github.event_name}}" = "push" ]; then

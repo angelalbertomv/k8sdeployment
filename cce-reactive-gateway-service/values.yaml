@@ -8,7 +8,7 @@ replicaCount: 1
 nameSpace: opendo # AKS
 
 image:
-  repository: pgxi1weuacrcoehcr001.azurecr.io/gsc-onboarding/digitalonboarding.cce-gateway-service  # URL harbor image without version :1.0.3
+  repository: pgxi1weuacrcoehcr001.azurecr.io/gsc-onboarding/digitalonboarding.cce-reactive-gateway-service  # URL harbor image without version :1.0.3
   pullPolicy: Always
   tag: develop
 ## Uncomment to download image private #DONT TOUCH
