@@ -62,21 +62,15 @@ containers:
 
 #VARIABLES EJEMPLO PERFIL , VARIABLES EN LINEAS DE COMANDOS PARA JAVA O ESPECIFICAS DE SPRING
 env:
-  EUREKA_SERVER_URL: cce-registry-and-location-server
+  EUREKA_SERVER_URL: cce-discovery-service
   SPRING_PROFILES_ACTIVE: dev
-  CONFIG_SERVER_SERVICE_ID: cce-config-server
-  CCE_EMAIL_SERVICE_ID: cce-service
-  ZIPKIN_SERVER_URL: https://cce-monitoring-usa.dgo.dev.pagonxt.corp/
-  SERENITY_ENABLED: false
-  SERENITY_KEY_SERVER_URL: https://sos.onboarding.dca.dev.api.pagonxt.corp/v1/publicKey/
+  CONFIG_SERVER_SERVICE_ID: cce-config-service
   AZURE_KEYVAULT_ENABLED: true
-  AZURE_KEYS: emailage-cert, threatpulse-ca-cert, threatpulse-root-ca-cert
+  AZURE_KEYS: threatpulse-ca-cert, threatpulse-root-ca-cert
 
 envSecrets:
   CONFIG_SERVER_SECURITY_USERNAME: cce-secrets
   CONFIG_SERVER_SECURITY_PASSWORD: cce-secrets
-  THIRD_PARTY_CLIENT_ID: cce-secrets
-  THIRD_PARTY_CLIENT_SECRET: cce-secrets
   AZURE_URI: cce-secrets
   AZURE_CLIENT_ID: cce-secrets
   AZURE_CLIENT_SECRET: cce-secrets
@@ -101,14 +95,10 @@ ingress:
     - host: cce-gateway-usa.dgo.dev.pagonxt.corp #URL DEL MICRO A EXPONER
       paths:
         - / # PATH DEL MICRO
-    - host: cce-gateway-usa.internal.dgo.dev.pagonxt.corp #URL DEL MICRO A EXPONER
-      paths:
-        - / # PATH DEL MICRO
   tls:
     - secretName: opendo-tls-internet # NO TOCAR
       hosts:
         - cce-gateway-usa.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
-        - cce-gateway-usa.internal.dgo.dev.pagonxt.corp # BASE PATH DEL PROYECTO
 
 nodeSelector: {}
 

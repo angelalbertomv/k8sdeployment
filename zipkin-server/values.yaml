@@ -45,7 +45,6 @@ containers:
 env:
   SPRING_PROFILES_ACTIVE: dev
 
-
 envSecrets: {}
 
 service:
