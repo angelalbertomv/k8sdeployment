@@ -10,7 +10,7 @@ nameSpace: opendo # AKS
 image:
   repository: pgxi1weuacrcoehcr001.azurecr.io/gsc-onboarding/digitalonboarding.obf-discovery-service  # URL harbor image witout version :1.0.3
   pullPolicy: Always
-  tag: develop
+  tag: 1.0.5-release
 ## Uncomment to download image private #DONT TOUCH
 imagePullSecrets:
   - name: regcred
@@ -35,6 +35,7 @@ securityContext:
    runAsNonRoot: true
    runAsUser: 1000
    
+# RESOURCES CONFIGURATION
 resources:
   requests:
     memory: 156Mi
@@ -45,12 +46,12 @@ resources:
 
 #AUTOSCALER CONFIGURATION
 autoscaler:
-  min_replicas: 1  
+  min_replicas: 1
   max_replicas: 1
   #Average memory utilization value
-  memory_average_value: 1800Mi
+  memory_average_value: 1Gi
   #Average cpu utilization percentage
-  cpu_average_utilization: 80
+  cpu_average_value: 600m
 
 #PUERTOS DE LOS CONTENEDORES DENTRO DEL AKS
 containers:

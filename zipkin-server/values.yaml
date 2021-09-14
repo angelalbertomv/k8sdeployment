@@ -34,8 +34,26 @@ securityContext:
    readOnlyRootFilesystem: false
    runAsNonRoot: true
    runAsUser: 1000
-#PUERTOS DE LOS CONTENEDORES DENTRO DEL AKS
 
+# RESOURCES CONFIGURATION
+resources:
+  requests:
+    memory: 1Gi
+    cpu: 500m
+  limits:
+    memory: 2Gi
+    cpu: 2000m
+
+#AUTOSCALER CONFIGURATION
+autoscaler:
+  min_replicas: 1
+  max_replicas: 1
+  #Average memory utilization value
+  memory_average_value: 1.5Gi
+  #Average cpu utilization percentage
+  cpu_average_value: 600m
+
+#PUERTOS DE LOS CONTENEDORES DENTRO DEL AKS
 containers:
   portName: http
   port: 9411

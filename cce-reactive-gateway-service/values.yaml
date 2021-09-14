@@ -10,7 +10,7 @@ nameSpace: opendo # AKS
 image:
   repository: pgxi1weuacrcoehcr001.azurecr.io/gsc-onboarding/digitalonboarding.cce-reactive-gateway-service  # URL harbor image without version :1.0.3
   pullPolicy: Always
-  tag: develop
+  tag: 1.0.0-release
 ## Uncomment to download image private #DONT TOUCH
 imagePullSecrets:
   - name: regcred
@@ -34,26 +34,26 @@ securityContext:
    readOnlyRootFilesystem: false
    runAsNonRoot: true
    runAsUser: 1000
-   
+
+# RESOURCES CONFIGURATION
 resources:
   requests:
-    memory: 156Mi
-    cpu: 100m
+    memory: 1Gi
+    cpu: 500m
   limits:
     memory: 2Gi
     cpu: 2000m
 
 #AUTOSCALER CONFIGURATION
 autoscaler:
-  min_replicas: 1  
+  min_replicas: 1
   max_replicas: 1
   #Average memory utilization value
-  memory_average_value: 1800Mi
+  memory_average_value: 1.5Gi
   #Average cpu utilization percentage
-  cpu_average_utilization: 80
+  cpu_average_value: 600m
 
 #PUERTOS DE LOS CONTENEDORES DENTRO DEL AKS
-
 containers:
   portName: http
   port: 2000
