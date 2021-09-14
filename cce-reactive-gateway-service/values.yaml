@@ -56,7 +56,7 @@ autoscaler:
 
 containers:
   portName: http
-  port: 8090
+  port: 2000
   protocol: TCP
 
 
@@ -85,9 +85,9 @@ envSecrets:
 service:
   type: ClusterIP
   portName: https
-  port: 8090
-  targetPort: 8090
-  containerPort: 8090 #RELACIONADO CON EL CONTAINERS poort
+  port: 2000
+  targetPort: 2000
+  containerPort: 2000 #RELACIONADO CON EL CONTAINERS poort
 
 
 ingress:
