@@ -53,7 +53,7 @@ jobs:
         if [ "${{github.event_name}}" = "push" ]; then
           PARAMS=''
         fi
-        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME        
+        helm upgrade -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME        
     - name: Delay
       shell: bash
       run: sleep 60              
@@ -67,7 +67,7 @@ jobs:
         if [ "${{github.event_name}}" = "push" ]; then
           PARAMS=''
         fi
-        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME
+        helm upgrade -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME
     - name: Delay
       shell: bash
       run: sleep 60        
@@ -81,7 +81,7 @@ jobs:
         if [ "${{github.event_name}}" = "push" ]; then
           PARAMS=''
         fi
-        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME    
+        helm upgrade -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME    
     - name: Helm Install/Upgrade Gateway Service
       env:
         CHART_NAME: cce-reactive-gateway-service/
@@ -92,7 +92,7 @@ jobs:
         if [ "${{github.event_name}}" = "push" ]; then
           PARAMS=''
         fi
-        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME    
+        helm upgrade -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME    
     - name: Helm Install/Upgrade Zipkin
       env:
         CHART_NAME: zipkin-server/
@@ -103,4 +103,4 @@ jobs:
         if [ "${{github.event_name}}" = "push" ]; then
           PARAMS=''
         fi
-        helm upgrade --recreate-pods -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME
+        helm upgrade -i --history-max 3 $PARAMS -n $NAMESPACE $CHART_DESC $CHART_NAME -f $VALUES_NAME
